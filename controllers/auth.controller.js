@@ -46,16 +46,22 @@ export const signIn = async (req, res, next) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
+      secure: true,
+      sameSite: "None",
       expires: accessTokenValidUntil,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
+      secure: true,
+      sameSite: "None",
       expires: refreshTokenValidUntil,
     });
 
     res.cookie("sessionId", _id, {
       httpOnly: true,
+      secure: true,
+      sameSite: "None",
       expires: refreshTokenValidUntil,
     });
 
