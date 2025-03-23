@@ -8,16 +8,22 @@ export const refreshToken = async (req, res, next) => {
 
     res.cookie("accessToken", session.accessToken, {
       httpOnly: true,
+      secure: true, // ✅ обязательно для HTTPS
+      sameSite: "None", // ✅ обязательно для кросс-доменных куков
       expires: session.accessTokenValidUntil,
     });
 
     res.cookie("refreshToken", session.refreshToken, {
       httpOnly: true,
+      secure: true, // ✅ обязательно для HTTPS
+      sameSite: "None", // ✅ обязательно для кросс-доменных куков
       expires: session.refreshTokenValidUntil,
     });
 
     res.cookie("sessionId", session._id, {
       httpOnly: true,
+      secure: true, // ✅ обязательно для HTTPS
+      sameSite: "None", // ✅ обязательно для кросс-доменных куков
       expires: session.refreshTokenValidUntil,
     });
 
