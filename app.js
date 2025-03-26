@@ -14,7 +14,7 @@ import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 const app = express();
 
 // test
-app.set("trust proxy", true);
+// app.set("trust proxy", true);
 // test / /
 
 
