@@ -13,6 +13,11 @@ import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 
 const app = express();
 
+// test
+app.set("trust proxy", true);
+// test / /
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
