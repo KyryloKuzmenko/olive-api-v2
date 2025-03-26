@@ -10,6 +10,8 @@ const arcjetMiddleware = async (req, res, next) => {
 
             return res.status(403).json({ error: 'Access denied' });
         }
+        console.log("Incoming IP:", req.ip);
+        console.log("X-Forwarded-For:", req.headers["x-forwarded-for"]);
 
         next();
     } catch (error) {
