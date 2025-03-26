@@ -6,6 +6,9 @@ export const refreshToken = async (req, res, next) => {
 
     const { user, session } = await handleRefreshToken(refreshToken);
 
+    const userData = user.toObject();
+    delete userData.password;
+
     res.cookie("accessToken", session.accessToken, {
       httpOnly: true,
       secure: true,
@@ -31,8 +34,8 @@ export const refreshToken = async (req, res, next) => {
       success: true,
       message: "Token refreshed successfully",
       // test
-      user,
-      // test / /
+      user: userData,
+      //  //
       data: {
         accessToken: session.accessToken,
         refreshToken: session.refreshToken,
