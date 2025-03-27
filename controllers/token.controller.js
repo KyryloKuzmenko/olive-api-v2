@@ -33,15 +33,13 @@ export const refreshToken = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: "Token refreshed successfully",
-      // test
       user: userData,
-      //  //
-      data: {
-        accessToken: session.accessToken,
-        refreshToken: session.refreshToken,
-        accessTokenValidUntil: session.accessTokenValidUntil,
-        refreshTokenValidUntil: session.refreshTokenValidUntil,
-      },
+      // data: {
+      //   accessToken: session.accessToken,
+      //   refreshToken: session.refreshToken,
+      //   accessTokenValidUntil: session.accessTokenValidUntil,
+      //   refreshTokenValidUntil: session.refreshTokenValidUntil,
+      // },
     });
   } catch (error) {
     next(error);

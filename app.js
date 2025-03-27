@@ -36,7 +36,7 @@ app.use("/api/v1/olives", oliveRouter);
 app.use(errorMiddleware);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to api");
+  res.status(404).send("Not Found");
 });
 
 app.listen(PORT, async () => {
