@@ -17,13 +17,12 @@ const app = express();
 // app.set("trust proxy", true);
 // test / /
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://localhost:5173",
+    origin: ["https://localhost:5173", "https://olive-ront-v2.vercel.app"],
     credentials: true,
   })
 );
