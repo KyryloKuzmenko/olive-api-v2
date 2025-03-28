@@ -13,19 +13,17 @@ import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 
 const app = express();
 
-// test
-// app.set("trust proxy", true);
-// test / /
+app.set("trust proxy", true);
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(
   cors({
     origin: ["https://localhost:5173", "https://olive-ront-v2.vercel.app"],
     credentials: true,
   })
 );
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(arcjetMiddleware);
 
 app.use("/api/v1/auth", authRouter);
