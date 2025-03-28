@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@arcjet/node": "^1.0.0-beta.3",
+    "@turf/turf": "^7.2.0",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
