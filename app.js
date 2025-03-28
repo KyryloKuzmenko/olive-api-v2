@@ -14,9 +14,10 @@ import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 const app = express();
 
 // test
-// app.set("trust proxy", true);
+app.set("trust proxy", true);
 // test / /
 
+app.use(arcjetMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -26,7 +27,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(arcjetMiddleware);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
