@@ -61,6 +61,7 @@ export const createOlive = async (req, res, next) => {
     if (recentMarkers >= 3) {
       return res.status(429).json({
         message: "You can only place 3 markers per hour",
+        code: "MARKER_LIMIT_REACHED",
       });
     }
 
