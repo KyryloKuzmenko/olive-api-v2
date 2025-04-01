@@ -15,7 +15,10 @@ export const createOlive = async (req, res, next) => {
     if (recent) {
       return res
         .status(429)
-        .json({ message: "Please wait before adding another marker" });
+        .json({
+          message: "Please wait before adding another marker",
+          code: "TOO_SOON",
+        });
     }
 
     // 2️⃣ Проверка, находится ли точка внутри допустимой области
