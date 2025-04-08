@@ -6,6 +6,19 @@ import { oneHourAgo } from "../constants/users.js";
 
 export const createOlive = async (req, res, next) => {
   try {
+    // 4️⃣ Проверка на лимит: не более 3 маркеров за последний час
+    const recentMarkers = await Olive.countDocuments({
+      user: req.user._id,
+      createdAt: { $gt: oneHourAgo },
+    });
+
+    if (recentMarkers >= 3) {
+      return res.status(429).json({
+        message: "You can only place 3 markers per hour",
+        code: "MARKER_LIMIT_REACHED",
+      });
+    }
+
     // 1️⃣ Ограничение по частоте — 1 маркер раз в 10 секунд
     const recent = await Olive.findOne({
       user: req.user._id,
@@ -13,12 +26,10 @@ export const createOlive = async (req, res, next) => {
     });
 
     if (recent) {
-      return res
-        .status(429)
-        .json({
-          message: "Please wait before adding another marker",
-          code: "TOO_SOON",
-        });
+      return res.status(429).json({
+        message: "Please wait before adding another marker",
+        code: "TOO_SOON",
+      });
     }
 
     // 2️⃣ Проверка, находится ли точка внутри допустимой области
@@ -52,19 +63,6 @@ export const createOlive = async (req, res, next) => {
     if (nearby) {
       return res.status(403).json({
         message: "Another marker already exists within 200 meters",
-      });
-    }
-
-    // 4️⃣ Проверка на лимит: не более 3 маркеров за последний час
-    const recentMarkers = await Olive.countDocuments({
-      user: req.user._id,
-      createdAt: { $gt: oneHourAgo },
-    });
-
-    if (recentMarkers >= 3) {
-      return res.status(429).json({
-        message: "You can only place 3 markers per hour",
-        code: "MARKER_LIMIT_REACHED",
       });
     }
 
